@@ -22,12 +22,5 @@ public class SpiritBase : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if(playerController!=null)
-        if (Input.GetKey(KeyCode.E))
-        {
-            spirit.SetTarget(playerController.GetFollowTransform());
-        }
-    }
+   
 }
