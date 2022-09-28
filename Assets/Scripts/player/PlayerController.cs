@@ -64,6 +64,12 @@ public class PlayerController : MonoBehaviour
         currentRotation.x = ClampAngle(currentRotation.x, xMin, xMax);
 
         transform.rotation = Quaternion.Euler(currentRotation);
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+
+            Cursor.visible = true;
+        }
     }
 
     private void FixedUpdate()
@@ -76,6 +82,11 @@ public class PlayerController : MonoBehaviour
 
         
 
+    }
+
+    public void PlayFootSound()
+    {
+        SoundManager.PlaySound(SoundManager.Sound.FootStep, .1f);
     }
 
     public bool IsGrounded(){
