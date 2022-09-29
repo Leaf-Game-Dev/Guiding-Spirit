@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask layerMask;
     [SerializeField] Transform FollowTransform;
 
+    public bool CanControll;
     [SerializeField] float speed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float normalSpeed,maxSpeed,minSpeed;
@@ -25,6 +26,14 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    public Rigidbody getRb()
+    {
+        return rb;
+    }
+    public Animator getAnim()
+    {
+        return animator;
+    }
     public Transform GetFollowTransform()
     {
         return FollowTransform;
@@ -32,19 +41,23 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         currentSpeed = normalSpeed;
-        Cursor.lockState = CursorLockMode.Locked;
 
-        Cursor.visible = false;
     }
 
     private void Update()
     {
 
         currentSpeed = normalSpeed;
-
-        VerticalInput = Input.GetAxis("Vertical");
-        float HorizontalInput = Input.GetAxis("Horizontal") ;
-
+        float HorizontalInput = 0;
+        if (CanControll)
+        {
+            VerticalInput = Input.GetAxis("Vertical");
+            HorizontalInput = Input.GetAxis("Horizontal");
+        }
+        else
+        {
+            VerticalInput = HorizontalInput = 0;
+        }
         if (VerticalInput >= 0) animator.SetFloat("Speed", new Vector3(VerticalInput, HorizontalInput).magnitude);
         else
         {
@@ -64,12 +77,12 @@ public class PlayerController : MonoBehaviour
         currentRotation.x = ClampAngle(currentRotation.x, xMin, xMax);
 
         transform.rotation = Quaternion.Euler(currentRotation);
-        if (Input.GetKey(KeyCode.Escape))
+        /*if (Input.GetKey(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
 
             Cursor.visible = true;
-        }
+        }*/
     }
 
     private void FixedUpdate()
