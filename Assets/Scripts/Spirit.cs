@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spirit : MonoBehaviour
 {
     [SerializeField] GameObject effect;
+    [SerializeField] GameObject parent;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -16,7 +17,7 @@ public class Spirit : MonoBehaviour
             var effect_ = Instantiate(effect, transform.position,Quaternion.identity);
             effect_.transform.localScale = Vector3.one*4;
             // destroy object
-            Destroy(transform.parent.gameObject);
+            parent.SetActive(false);
         }
     }
 

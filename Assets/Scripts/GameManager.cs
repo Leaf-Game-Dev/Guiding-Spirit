@@ -110,10 +110,11 @@ public class GameManager : MonoBehaviour
             SpiritStones--;
             SpiritCount.text = "x " + SpiritStones.ToString();
         }
-        else
+        if(SpiritStones<=0)
         {
             // game Finished
             FinishLine.SetActive(true);
+            Debug.Log("Finish!");
         }
     }
 
