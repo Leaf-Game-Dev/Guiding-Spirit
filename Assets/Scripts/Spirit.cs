@@ -13,7 +13,8 @@ public class Spirit : MonoBehaviour
             GameManager.instance.Decrement();
             SoundManager.PlaySound(SoundManager.Sound.coin, 0.5f);
             // show effect
-            Instantiate(effect, transform.position,Quaternion.identity);
+            var effect_ = Instantiate(effect, transform.position,Quaternion.identity);
+            effect_.transform.localScale = Vector3.one*4;
             // destroy object
             Destroy(transform.parent.gameObject);
         }
